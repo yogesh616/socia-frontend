@@ -1,0 +1,16 @@
+@keyframes typing-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    height: 5px;
+    border-radius: 50% 50% 25% 25%;
+  }
+  40% {
+    transform: translateY(-6px);
+    height: 8px;
+    border-radius: 50%;
+  }
+}
+
+.animate-typing-bounce {
+  animation: typing-bounce 0.5s alternate infinite ease;
+}
