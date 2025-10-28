@@ -198,23 +198,27 @@ useEffect(() => {
                   }`}
                 >
                   {/* Avatar Section */}
-                  <div className="relative flex-shrink-0">
-                    {otherUser.profileImage ? (
-                      <img
-                        src={otherUser.profileImage}
-                        alt={otherUser.username}
-                        className="w-12 h-12 rounded-full object-cover border border-zinc-700"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
-                        {otherUser.username?.[0]?.toUpperCase() || "?"}
-                      </div>
-                    )}
-                    {/* Unread Badge */}
-                    {isUnread && (
-                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-zinc-900"></span>
-                    )}
-                  </div>
+                 
+<div className="relative flex-shrink-0">
+  <img
+    src={
+      otherUser?.profileImage && otherUser.profileImage.trim() !== ""
+        ? otherUser.profileImage
+        : "/default-avatar.png" // ← put your default image path here
+    }
+    alt={otherUser?.username || "User"}
+    className="w-12 h-12 rounded-full object-cover border border-zinc-700"
+    onError={(e) => {
+      e.target.src = "/default-avatar.png"; // fallback if broken URL
+    }}
+  />
+
+  {/* Unread Badge */}
+  {isUnread && (
+    <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-zinc-900"></span>
+  )}
+</div>
+
 
                   {/* Chat Info */}
                   <div className="flex-1 min-w-0 text-left">
