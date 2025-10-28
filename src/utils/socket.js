@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const SOCKET_URL =  "https://socia-server-yd7t.onrender.com" || "http://localhost:3000"; // Change to your production URL
+export const SOCKET_URL =  "https://socia-chat-server.onrender.com" || "http://localhost:3000"; // Change to your production URL
 
 let socket = null;
 let reconnectAttempts = 0;
