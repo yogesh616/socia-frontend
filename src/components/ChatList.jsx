@@ -206,7 +206,8 @@ useEffect(() => {
         ? otherUser.profileImage
         : "/default-avatar.png" // ← put your default image path here
     }
-    alt={otherUser?.username || "User"}
+    alt={otherUser?.fullName || otherUser?.username || "Unknown User"}
+
     className="w-12 h-12 rounded-full object-cover border border-zinc-700"
     onError={(e) => {
       e.target.src = "/default-avatar.png"; // fallback if broken URL
@@ -230,7 +231,8 @@ useEffect(() => {
                             : "font-medium text-gray-300"
                         }`}
                       >
-                        {otherUser.fullName || otherUser.username}
+                      {otherUser?.fullName || otherUser?.username || "Unknown User"}
+
                       </h3>
                       {lastMsg && (
                         <span className="text-xs text-gray-500 ml-2 flex-shrink-0">
