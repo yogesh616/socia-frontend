@@ -29,22 +29,33 @@ const sendFcmTokenToServer = async (userId, token) => {
 
 
 
-  async function requestPermission() {
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") {
-    const token = await getToken(messaging, {
-      vapidKey: import.meta.env.VITE_VAPIDKEY
-    });
-  await sendFcmTokenToServer(user.id, token)
-  }
-  else if (permission === "denied") {
-    alert("You denied for the notification.")
+async function requestPermission() {
+  try {
+    const permission = await Notification.requestPermission();
+
+    if (permission === "granted") {
+      const token = await getToken(messaging, {
+        vapidKey: import.meta.env.VITE_VAPIDKEY
+      });
+
+      if (token) {
+        await sendFcmTokenToServer(user.id, token);
+        console.log("Token sent successfully:", token);
+      } else {
+        console.warn("No FCM token received.");
+      }
+    } else {
+      console.warn("Notifications are denied by the user.");
+    }
+  } catch (err) {
+    console.error("Error during notification permission or token retrieval:", err);
   }
 }
 
 useEffect(() => {
-requestPermission();
-}, [])
+  requestPermission();
+}, []);
+
 
 
   useEffect(() => {
